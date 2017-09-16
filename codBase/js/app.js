@@ -1,8 +1,8 @@
 var Tecla= document.getElementsByClassName('tecla')
-var i= 0
-for(i= 0; i < Tecla.length; i++){
-    Tecla[i].addEventListener('click', function(){alert(Tecla[i].id)})
+
+for(var i= 0; i < Tecla.length; i++){
+    Tecla[i].addEventListener('click', OperarTecla())
 }
-function OperarTecla(id){
-  alert(id)
+function OperarTecla(){
+  alert("hacer tecla as grande ")
 }
