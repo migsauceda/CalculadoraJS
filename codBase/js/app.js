@@ -88,7 +88,7 @@ function EvaluarEstados(Leido){
     case "eOperador": //2
       if (TipoLeido== "digito"){
         Estado= "eOperando2"
-        Operando2+= Leido
+        Operando2= Leido
         document.getElementById("display").innerHTML = Operando2
       }
       break;
@@ -102,15 +102,19 @@ function EvaluarEstados(Leido){
         Estado= "eOperador"
         RealizarCalculo()
       }
-      else if (TipoLeido== "igual"){
-        Estado= "igual"
+      else  if (Leido== "igual"){
+        Estado= "eIgual"
         RealizarCalculo()
       }
       break;
 
     case "eIgual":  //4
-      if (TipoLeido== "Operador"){
+    alert(Leido)
+      if (TipoLeido== "operador"){
         Estado= "eOperador"
+        RealizarCalculo()
+      }
+      else if (Leido== "igual") {
         RealizarCalculo()
       }
       break;
@@ -134,19 +138,18 @@ function RealizarCalculo(){
       else{
         Resultado= Number(Operando1) / Number(Operando2)
       }
-
       break;
+
     case "*":
       Resultado= Number(Operando1) * Number(Operando2)
-
       break;
+
     case "-":
       Resultado= Number(Operando1) - Number(Operando2)
-
       break;
+
     case "+":
       Resultado= Number(Operando1) + Number(Operando2)
-
       break;
     }
     document.getElementById("display").innerHTML = Resultado
