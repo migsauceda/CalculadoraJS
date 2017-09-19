@@ -72,8 +72,16 @@ function EvaluarEstados(Leido){
       case "igual":
         TipoLeido= "igual"
         break;
+      case "on":
+        TipoLeido= "on"
+        Operaciones= []
+        Estado= "eEspera"
+        document.getElementById("display").innerHTML = "0"
+        break;
       }
-
+      if (TipoLeido== "operador"){
+        document.getElementById("display").innerHTML = ""
+      }
   }
 
   //control de estados
@@ -81,7 +89,6 @@ function EvaluarEstados(Leido){
     case "eEspera": //0
       if (TipoLeido== "digito"){
         Estado= "eOperando1"
-        //Operando1= Leido
         Operaciones[0]= Leido //el primer operando
         document.getElementById("display").innerHTML = Operaciones[0]
       }
@@ -89,8 +96,18 @@ function EvaluarEstados(Leido){
 
     case "eOperando1": //1
       if (TipoLeido== "digito"){
-        //Operando1+= Leido
-        Operaciones[0]+= Leido //el primer operando
+        if(Leido== "0" && Operaciones[0]== "0"){
+          Operaciones[0]= 0
+        }
+        else{
+            tmp= Number(Operaciones[0])
+            if (tmp == 0){
+              Operaciones[0]= Leido //el primer operando
+            }
+            else{
+                Operaciones[0]+= Leido //el primer operando
+            }
+        }
         document.getElementById("display").innerHTML = Operaciones[0]
       }
       else if (TipoLeido== "operador"){
@@ -108,7 +125,6 @@ function EvaluarEstados(Leido){
     case "eOperador": //2
       if (TipoLeido== "digito"){
         Estado= "eOperando2"
-        //Operando2= Leido
         Operaciones[2]= Leido //el segundo operando
         document.getElementById("display").innerHTML = Operaciones[2]
       }
@@ -119,7 +135,6 @@ function EvaluarEstados(Leido){
 
     case "eOperando2": //3
       if (TipoLeido== "digito"){
-        //Operando2+= Leido
         Operaciones[2]+= Leido //el segundo operando
         document.getElementById("display").innerHTML = Operaciones[2]
       }
@@ -127,15 +142,18 @@ function EvaluarEstados(Leido){
         Estado= "eOperador"
         Operaciones[3]= Operador
         RealizarCalculo()
-        document.getElementById("display").innerHTML = Operaciones[0]
+        //document.getElementById("display").innerHTML = Operaciones[0]
       }
-      else if (Leido== "sign") {
-        Number(Operaciones[2])*= -1 //el primer operando
+      else if (TipoLeido== "sign") {
+        tmp= Operaciones[2]
+        tmp= Number(tmp) * -1
+        Operaciones[2]= String(tmp) //el primer operando
         document.getElementById("display").innerHTML = Operaciones[2]
       }
       else  if (TipoLeido== "igual"){
         Estado= "eIgual"
         RealizarCalculo()
+        document.getElementById("display").innerHTML = Operaciones[0]
       }
       break;
 
@@ -143,6 +161,12 @@ function EvaluarEstados(Leido){
       if (TipoLeido== "operador"){
         Estado= "eOperador"
         Operaciones[1]= Operador
+      }
+      else if (TipoLeido=="sign") {
+        tmp= Operaciones[0]
+        tmp= Number(tmp) * -1
+        Operaciones[0]= String(tmp) //el primer operando
+        document.getElementById("display").innerHTML = Operaciones[0]
       }
       break;
 
@@ -157,7 +181,7 @@ function EvaluarEstados(Leido){
 ==============================================================================
 */
 function RealizarCalculo(){
-  switch (Operador){
+  switch (Operaciones[1]){
     case "/":
       if (Number(Operaciones[2]) <= 0){
         Resultado= "Error"
@@ -179,6 +203,6 @@ function RealizarCalculo(){
       Resultado= Number(Operaciones[0]) + Number(Operaciones[2])
       break;
     }
-    document.getElementById("display").innerHTML = Resultado
     Operaciones[0]= Resultado
+    Operaciones[1]= Operaciones[3]
 }
