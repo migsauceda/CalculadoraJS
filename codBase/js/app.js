@@ -120,7 +120,7 @@ function EvaluarEstados(Leido){
                 Operaciones[0]+= Leido //el primer operando
             }
         }
-        document.getElementById("display").innerHTML = RealizarCalculo()
+        document.getElementById("display").innerHTML = Operaciones[0]
       }
       else if (TipoLeido== "operador"){
         Estado= "eOperador"
@@ -170,7 +170,6 @@ function EvaluarEstados(Leido){
       break;
 
     case "eIgual":  //4
-    alert("igual 4")
       if (TipoLeido== "operador"){
         Estado= "eOperador"
         Operaciones[1]= Operador
