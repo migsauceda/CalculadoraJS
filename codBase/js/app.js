@@ -7,6 +7,10 @@ var Estado
 var TipoLeido
 var Leido
 var Operaciones= new Array()
+var alto
+var ancho
+var altotxt
+var anchotxt
 
 //inicializa
 Operando2= 0
@@ -20,6 +24,38 @@ for(var i= 0; i < Tecla.length; i++){
   document.getElementById(Tecla[i].id).onclick= OperarTecla;
 }
 
+//evento listener par todas menos suma
+var lister= document.querySelectorAll(".tecla")
+for(var i= 0; i < lister.length; i++){
+  lister[i].addEventListener("mousedown", Disminuir)
+  lister[i].addEventListener("mouseup", Aumentar)
+}
+//Disminuir tamaño de teclas
+function Disminuir(even){
+  ancho= document.getElementById(even.currentTarget.id).width
+  ancho = ancho - 8
+  anchotxt = ancho.toString()+"px"
+
+  alto= document.getElementById(even.currentTarget.id).height
+  alto = alto - 8
+  altotxt = alto.toString()+"px"
+
+  document.getElementById(even.currentTarget.id).style.width= anchotxt
+  document.getElementById(even.currentTarget.id).style.height = altotxt
+}
+//Volver teclas a tamaño original
+function Aumentar(even){
+  alto= document.getElementById(even.currentTarget.id).height
+  alto= alto + 8
+  altotxt= alto.toString()+"px"
+
+  ancho= document.getElementById(even.currentTarget.id).width
+  ancho= ancho + 8
+  anchotxt= ancho.toString()+"px"
+
+  document.getElementById(even.currentTarget.id).style.width= anchotxt
+  document.getElementById(even.currentTarget.id).style.height = altotxt
+}
 /*
 ==============================================================================
 
