@@ -1,4 +1,4 @@
-//variables globales para operandos, operadores, Resultado
+//variables globales para operandos, operadores, Resultado e interfaces
 var tmp
 var ExistePunto
 var Operador
@@ -24,12 +24,13 @@ for(var i= 0; i < Tecla.length; i++){
   document.getElementById(Tecla[i].id).onclick= OperarTecla;
 }
 
-//evento listener par todas menos suma
+//evento listener par todas
 var lister= document.querySelectorAll(".tecla")
 for(var i= 0; i < lister.length; i++){
   lister[i].addEventListener("mousedown", Disminuir)
   lister[i].addEventListener("mouseup", Aumentar)
 }
+
 //Disminuir tamaño de teclas
 function Disminuir(even){
   ancho= document.getElementById(even.currentTarget.id).width
@@ -43,6 +44,7 @@ function Disminuir(even){
   document.getElementById(even.currentTarget.id).style.width= anchotxt
   document.getElementById(even.currentTarget.id).style.height = altotxt
 }
+
 //Volver teclas a tamaño original
 function Aumentar(even){
   alto= document.getElementById(even.currentTarget.id).height
@@ -58,7 +60,10 @@ function Aumentar(even){
 }
 /*
 ==============================================================================
-
+recibe: Objeto event
+retorna: nada
+Descripcion: llama a la función que se encarga de reaccionar en funcion del
+estado y la tecla presionada
 ==============================================================================
 */
 //hace lo correspondiene con la tecla que recibio el evento click
@@ -73,7 +78,10 @@ function OperarTecla(pEvento){
 
 /*
 ==============================================================================
-
+recibe: un elemeno del DOM sobre el cual se ha dado clic
+retorna: nada
+Descripcion: cambia estados y segun este se realizan acciones correspondientes
+pero no hace el calculo
 ==============================================================================
 */
 function EvaluarEstados(Leido){
@@ -229,7 +237,10 @@ function EvaluarEstados(Leido){
 
 /*
 ==============================================================================
-
+recibe: nada
+retorna: el Resultado de la operacio aritmética
+Descripcion: realiza la operacio aritmetica y garda los resultdos parciales
+en un arreglo
 ==============================================================================
 */
 function RealizarCalculo(){
