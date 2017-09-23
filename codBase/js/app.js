@@ -1,3 +1,4 @@
+//proyecto final JavaScrit Presentado por Miguel Sauceda
 //variables globales para operandos, operadores, Resultado e interfaces
 var tmp
 var ExistePunto
